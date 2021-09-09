@@ -18,3 +18,7 @@ export function appControlSet(values, clearMessages = false) {
   values = clearMessages ? {info: null, warn: null, error: null, ...values} : values;
   return {type: 'APP_CONTROL_SET', values};
 }
+
+export function setMessages(values) {
+  return appControlSet(values, true);
+}

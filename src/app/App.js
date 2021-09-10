@@ -14,9 +14,9 @@ function App() {
       {view === 'error' && <h1>TODO: error screen</h1>}
       {view === 'main' && <h1>TODO: main screen</h1>}
       <footer>
-        {info && <h2>TODO:info {info}</h2>}
-        {warn && <h2>TODO:warn {warn}</h2>}
-        {error && <h2>TODO:error {error}</h2>}
+        {info && <h2 title="info">{info}</h2>}
+        {warn && <h2 title="warn">{warn}</h2>}
+        {error && <h2 title="error">{error}</h2>}
       </footer>
     </div>
   );

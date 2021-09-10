@@ -1,6 +1,9 @@
 import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {submitLogin} from './submitLogin';
 
 function Login() {
+  const dispatch = useDispatch();
   const [usr, setUsr] = useState('');
   const [pwd, setPwd] = useState('');
 
@@ -11,7 +14,7 @@ function Login() {
 
   function doSignIn(event) {
     event.preventDefault();
-    // todo: submitLogin(usr, pwd);
+    dispatch(submitLogin(usr, pwd));
   }
 
   function onUsrChange(evt) {

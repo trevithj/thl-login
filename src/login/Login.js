@@ -1,16 +1,12 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import {Button, Form, Frame, H3} from './fields';
 import {submitLogin} from './submitLogin';
 
 function Login() {
   const dispatch = useDispatch();
   const [usr, setUsr] = useState('');
   const [pwd, setPwd] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    return false;
-  }
 
   function doSignIn(event) {
     event.preventDefault();
@@ -27,9 +23,9 @@ function Login() {
   }
 
   return (
-    <div>
-      <h3>Login</h3>
-      <form onSubmit={handleSubmit}>
+    <Frame>
+      <H3>Login</H3>
+      <Form>
         <label>
           <span>User Name:</span>
           <input name="username" type="text" placeholder="Enter username" value={usr} onChange={onUsrChange}/>
@@ -38,9 +34,9 @@ function Login() {
           <span>Password:</span>
           <input name="password" type="password" placeholder="Enter password" value={pwd} onChange={onPwdChange} />
         </label>
-      </form>
-      <button onClick={doSignIn}>Sign In</button>
-    </div>
+      </Form>
+      <Button onClick={doSignIn}>Sign In</Button>
+    </Frame>
   )
 }
 

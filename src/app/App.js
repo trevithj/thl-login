@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        THL Digital
+        <img src="/THL_Digital_logo.jpg" alt="main logo"/>
       </header>
       {view === 'login' && <Login />}
       {view === 'error' && <h1>TODO: error screen</h1>}

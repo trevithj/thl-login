@@ -18,16 +18,12 @@ describe('The login screen', () => {
     fields.signin = screen.getByText(/sign in/i);
   })
 
-  it('renders the login screen', async () => {
+  it('renders the relevant components', async () => {
     const heading = screen.getByText(/Login/i);
     expect(heading).toBeInTheDocument();
     expect(fields.usrInput).toBeInTheDocument();
     expect(fields.pwdInput).toBeInTheDocument();
-
-    //and objects if submit is clicked too soon
-    fireEvent.click(fields.signin);
-    const error = await screen.findByTitle('error');
-    expect(error).toHaveTextContent(/username is not set/i);
+    expect(fields.signin).toBeDisabled();
   });
 
   it('checks for minimal password', async () => {
@@ -37,9 +33,7 @@ describe('The login screen', () => {
     fireEvent.change(fields.usrInput, {
       target: {value: 'something'},
     });
-    fireEvent.click(fields.signin);
-    error = await screen.findByTitle('error');
-    expect(error).toHaveTextContent(/password is not set/i);
+    expect(fields.signin).toBeDisabled();
 
     fireEvent.change(fields.pwdInput, {
       target: {value: 'tiny'},
@@ -78,7 +72,7 @@ describe('The login screen', () => {
     fireEvent.click(fields.signin);
 
     info = await screen.findByTitle('info');
-    expect(info).toHaveTextContent(/login successful/i);
+    expect(info).toHaveTextContent(/successful/i);
     error = screen.queryByTitle('error');
     expect(error).toBeNull();
 

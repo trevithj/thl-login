@@ -8,6 +8,9 @@ function Login() {
   const [usr, setUsr] = useState('');
   const [pwd, setPwd] = useState('');
 
+  // Only enable sign in button if fields are populated
+  const canSignIn = usr && pwd;
+
   function doSignIn(event) {
     event.preventDefault();
     dispatch(submitLogin(usr, pwd));
@@ -35,7 +38,7 @@ function Login() {
           <input name="password" type="password" placeholder="Enter password" value={pwd} onChange={onPwdChange} />
         </label>
       </Form>
-      <Button onClick={doSignIn}>Sign In</Button>
+      <Button disabled={!canSignIn} onClick={doSignIn}>Sign In</Button>
     </Frame>
   )
 }

@@ -1,6 +1,41 @@
-# Getting Started with Create React App
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The development and testing used `git version 2.28.0.windows.1`, `node v14.15.5` and `yarn 1.22.4`, so the below instructions assume the same.
+
+## Quick Start
+
+As detailed below, the app can be run using the following steps via a command-line terminal in an appropriate folder:
+```
+git clone https://github.com/trevithj/thl-login.git
+cd thl-login
+yarn
+yarn start
+```
+The deployer should open a browser at [http://localhost:3000](http://localhost:3000), displaying the login screen.
+
+## App Summary
+
+The SignIn button will not be active unless both the text fields have at least one character.
+Password validation takes place on submit, but before a request gets sent.
+The app currently has simple validation on minimal length of password, and one compulsory character.
+Details of invalid passwords get displayed in an error message, after the user clicks the signin button.
+
+Entering a valid (case-sensitive) username and password will direct the user to a Main screen with a message indicating successful login.
+The Main screen will have a slightly different title, depending on the type of user.
+Valid username|password pairs are:
+1. admin|admin for an 'administration' access.
+1. happy|gilmour for a 'regular' access.
+
+Entering an unknown username or an incorrect password will cause an Unauthorized error message.
+
+To run a suite of existing unit tests, run the below command in a terminal in the `thl-login` folder:
+```
+yarn test
+```
+
+The tests are in the relevant folders, and have a `*.test.js` suffix.
+
 
 ## Available Scripts
 
@@ -34,16 +69,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

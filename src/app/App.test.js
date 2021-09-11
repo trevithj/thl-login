@@ -72,7 +72,9 @@ describe('The login screen', () => {
     fireEvent.click(fields.signin);
 
     info = await screen.findByTitle('info');
-    expect(info).toHaveTextContent(/successful/i);
+    expect(info).toHaveTextContent(/please wait/i);
+    await screen.findByText('Main Admin Screen');
+    expect(info).toHaveTextContent(/signin was successful/i);
     error = screen.queryByTitle('error');
     expect(error).toBeNull();
 

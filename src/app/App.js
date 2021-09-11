@@ -1,6 +1,7 @@
 import './App.css';
 import {useSelector} from 'react-redux';
 import Login from '../login/Login';
+import Main from '../common/Main';
 
 function App() {
   const {view, info, warn, error} = useSelector(state => state.appControl);
@@ -11,6 +12,7 @@ function App() {
         <img src="/THL_Digital_logo.jpg" alt="main logo"/>
       </header>
       {view === 'login' && <Login />}
+      {view === 'main' && <Main />}
       {view === 'error' && <h1>TODO: error screen</h1>}
       {view === 'main' && <h1>TODO: main screen</h1>}
       <footer>

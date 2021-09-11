@@ -9,6 +9,11 @@ export default function appControl(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case "APP_CONTROL_SET":
       return {...state, ...action.values};
+    case "LOGIN_SUCCESS": {
+      const { info } = action;
+      const view = 'main';
+      return {...DEFAULT_STATE, info, view};
+    }
     default: return state;
   }
 };

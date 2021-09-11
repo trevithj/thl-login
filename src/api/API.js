@@ -1,7 +1,4 @@
-function makeAuthHeader(usr, pwd) {
-  const TestToken = btoa([usr, pwd].join(":"));
-  return `BASIC ${TestToken}`;
-}
+import {makeAuthHeader} from "../common/utils";
 
 export function doSignIn(username, password) {
   const headers = {
@@ -28,20 +25,30 @@ const TokenStore = {
 function doPost(url, options) {
   // console.log('posting...', url, options);
   const { headers } = options;
-  if(url==='/login') {
-    return handleLogin(headers.Authorization);
-  } else {
-    return Promise.reject({status:404, message:'Not found'});
-  }
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if(url==='/login') {
+        const resp = handleLogin(headers.Authorization);
+        if(resp.status===200) {
+          resolve(resp);
+        } else {
+          reject(resp);
+        }
+      } else {
+        reject({status:404, message:'Not found'});
+      }
+    }, 600); //mock network delay to allow loading messages time to be seen
+  });
+
 }
 
 function handleLogin(authorization = ':') {
   const user = decode(authorization);
   if (user !== null) {
     const { accessToken } = user;
-    return Promise.resolve({status:200, message: 'OK', accessToken});
+    return {status:200, message: 'OK', accessToken};
   } else {
-    return Promise.reject({status:401, message:'Unauthorized'});
+    return {status:401, message:'Unauthorized'};
   }
 }
 

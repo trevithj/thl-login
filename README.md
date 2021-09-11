@@ -16,18 +16,22 @@ The deployer should open a browser at [http://localhost:3000](http://localhost:3
 
 ## App Summary
 
-The SignIn button will not be active unless both the text fields have at least one character.
+Username and password values are both case-sensitive. They are initially blank, and the SignIn button will not be active unless both the text fields contain at least one character.
+
 Password validation takes place on submit, but before a request gets sent.
-The app currently has simple validation on minimal length of password, and one compulsory character.
+The app currently has simple password validation: the password must be of minimal length, and contain one compulsory character.
 Details of invalid passwords get displayed in an error message, after the user clicks the signin button.
 
-Entering a valid (case-sensitive) username and password will direct the user to a Main screen with a message indicating successful login.
-The Main screen will have a slightly different title, depending on the type of user.
+Entering a valid username and password will direct the user to a `Main` screen with a message indicating successful login.
+The `Main` screen's title will vary, depending on the type of user.
+
 Valid username|password pairs are:
 1. admin|admin for an 'administration' access.
 1. happy|gilmour for a 'regular' access.
 
-Entering an unknown username or an incorrect password will cause an Unauthorized error message.
+Entering an unknown username or an incorrect password will cause an Unauthorized error message on the login screen. The user will not be directed past this screen.
+
+## Unit Tests
 
 To run a suite of existing unit tests, run the below command in a terminal in the `thl-login` folder:
 ```

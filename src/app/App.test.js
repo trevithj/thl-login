@@ -3,6 +3,7 @@ import {Provider} from 'react-redux'
 import App from './App';
 import {createAppStore} from '../store/root';
 
+const warning = jest.spyOn(global.console, 'warn');
 
 describe('The login screen', () => {
   const fields = {};
@@ -16,6 +17,7 @@ describe('The login screen', () => {
     fields.usrInput = screen.getByPlaceholderText('Enter username');
     fields.pwdInput = screen.getByPlaceholderText('Enter password');
     fields.signin = screen.getByText(/sign in/i);
+    warning.mockReset();
   })
 
   it('renders the relevant components', async () => {
@@ -24,6 +26,7 @@ describe('The login screen', () => {
     expect(fields.usrInput).toBeInTheDocument();
     expect(fields.pwdInput).toBeInTheDocument();
     expect(fields.signin).toBeDisabled();
+    expect(warning).not.toBeCalled();
   });
 
   it('checks for minimal password', async () => {
@@ -41,7 +44,7 @@ describe('The login screen', () => {
     fireEvent.click(fields.signin);
     error = await screen.findByTitle('error');
     expect(error).toHaveTextContent(/Password must be at least/i);
-
+    expect(warning).not.toBeCalled(); //no error, front-end check only
   });
 
   it('checks for correct login', async () => {
@@ -57,6 +60,7 @@ describe('The login screen', () => {
 
     error = await screen.findByTitle('error');
     expect(error).toHaveTextContent(/unauthorized/i);
+    expect(warning).toHaveBeenCalledTimes(1); //logs warning message
 
     //right username, wrong password
     fireEvent.change(fields.usrInput, {target: {value: 'admin'}});
@@ -65,6 +69,7 @@ describe('The login screen', () => {
 
     error = await screen.findByTitle('error');
     expect(error).toHaveTextContent(/unauthorized/i);
+    expect(warning).toHaveBeenCalledTimes(2); //logs 2nd warning message
 
     //right credentials
     fireEvent.change(fields.usrInput, {target: {value: 'admin'}});

@@ -62,3 +62,5 @@ function decode(authorization) {
   user.accessToken = btoa(JSON.stringify({isAdmin, expiry: Date.now() + TokenLifetime}));
   return user;
 }
+
+export const TEST = { doPost };

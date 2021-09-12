@@ -23,11 +23,11 @@ The app currently has simple password validation: the password must be of minima
 Details of invalid passwords get displayed in an error message, after the user clicks the signin button.
 
 Entering a valid username and password will direct the user to a `Main` screen with a message indicating successful login.
-The `Main` screen's title will vary, depending on the type of user.
+The `Main` screen's title will vary, depending on the type of user. NOTE: the app has no logout feature, so to re-run a login you will need to refresh the browser.
 
 Valid username|password pairs are:
-1. admin|admin for an 'administration' access.
-1. happy|gilmour for a 'regular' access.
+1. `admin|admin` for an 'administration' access. The Main heading will indicate an Admin screen.
+1. `happy|gilmour` for a 'regular' access.
 
 Entering an unknown username or an incorrect password will cause an Unauthorized error message on the login screen. The user will not be directed past this screen.
 
@@ -40,8 +40,13 @@ yarn test
 
 The tests are in the relevant folders, and have a `*.test.js` suffix.
 
+At present the tests cover:
 
-## Available Scripts
+* Submit code checking for valid parameters prior to posting.
+* Login screen showing appropriate messages after password validation or submit.
+* Post calls handling invalid url or credentials.
+
+## Details of Available Scripts
 
 In the project directory, you can run:
 

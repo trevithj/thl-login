@@ -39,7 +39,7 @@ function submitLoginThunk(usr, pwd) {
         throw new Error(resp);
       }
     }).catch(err => {
-      console.log({err});
+      console.warn(err);
       dispatch(setMessages({error: err.message}));
     });
   }

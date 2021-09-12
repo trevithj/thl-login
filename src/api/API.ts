@@ -1,6 +1,13 @@
 import {makeAuthHeader} from "../common/utils";
 
-export function doSignIn(username, password) {
+interface Options {
+  headers: {
+    'Content-Type'?: string,
+    'Authorization'?: string,
+  }
+}
+
+export function doSignIn(username:string, password:string) {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': makeAuthHeader(username, password)
@@ -11,18 +18,18 @@ export function doSignIn(username, password) {
  //////////////////////////////////////
 ////////Mock server response here/////
 
-const TokenStore = {
-  'YWRtaW46YWRtaW4=': {
+const TokenStore = new Map([
+  ['YWRtaW46YWRtaW4=', {
     isAdmin: true,
     accessToken:null
-  },
-  'aGFwcHk6Z2lsbW91cg==': {
+  }],
+  ['aGFwcHk6Z2lsbW91cg==', {
     isAdmin: false,
     accessToken:null
-  }
-}
+  }]
+]);
 
-function doPost(url, options) {
+function doPost(url:string, options:Options) {
   // console.log('posting...', url, options);
   const { headers } = options;
   return new Promise((resolve, reject) => {
@@ -54,9 +61,9 @@ function handleLogin(authorization = ':') {
 
 const TokenLifetime = 60000 * 60 * 30; //half an hour
 
-function decode(authorization) {
-  const token = authorization.split(' ')[1].trim();
-  const user = TokenStore[token];
+function decode(authorization:string) {
+  const token:string = authorization.split(' ')[1].trim();
+  const user:any = TokenStore.get(token);
   if(!user) return null;
   const { isAdmin } = user;
   user.accessToken = btoa(JSON.stringify({isAdmin, expiry: Date.now() + TokenLifetime}));

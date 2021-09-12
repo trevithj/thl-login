@@ -1,6 +1,7 @@
 import {decodeAccessToken} from "../common/utils";
+import { LoginAction } from './types';
 
-function user(state = {}, action) {
+function user(state = {}, action:LoginAction) {
   switch (action.type) {
     case 'LOGIN_SUCCESS': {
       const {accessToken} = action.resp;
